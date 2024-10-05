@@ -46,3 +46,16 @@ function destroyAction(PDO $connexion, int $id)
         header('Location: ' . BASE_PUBLIC_URL . 'posts');
 
 }
+function addFormAction(PDO $connexion) 
+{
+    // Je vais chercher les categories 
+    include_once '../app/models/categoriesModel.php';
+    $categories = \App\Models\CategoriesModel\findAll($connexion);
+    // Je charge la vue addForm dans $content
+    GLOBAL $content, $title;
+    $title = "Alex Parker - Add a post";
+    ob_start();
+    include '../app/views/posts/addForm.php';
+    $content = ob_get_clean();
+}
+

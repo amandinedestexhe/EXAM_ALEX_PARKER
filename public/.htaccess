@@ -1,3 +1,6 @@
+
+
+
 # Activation du module de réécriture d'URL :
 RewriteEngine on
 
@@ -11,8 +14,14 @@ RewriteEngine on
 # URL: ?posts=index
 RewriteRule ^posts$ index.php?posts=index [L]
 
+# ROUTE: Formulaire d'ajout d'un posts
+# PATTERN: /posts/add/form.html
+# URL: index.php?posts=addForm
+RewriteRule ^posts\/add\/form.html$ index.php?posts=addForm [L]
+
+
 # ROUTE: Détail d'un post
-# PATTERN: /books/{id}/{slug}
+# PATTERN: /posts/id/slug-du-post.html
 # URL: index.php?posts=show&id=xxx
 RewriteRule ^posts/([1-9][0-9]*)/[a-z0-9\-]+.html$ index.php?posts=show&id=$1 [L]
 
@@ -22,3 +31,4 @@ RewriteRule ^posts/([1-9][0-9]*)/[a-z0-9\-]+.html$ index.php?posts=show&id=$1 [L
 # --------------------------------------------------
 RewriteCond %{REQUEST_URI} !\.(js|css|jpg|gif|zip|png|pdf)$ [NC]
 RewriteRule ^(.*)$ index.php [L]
+

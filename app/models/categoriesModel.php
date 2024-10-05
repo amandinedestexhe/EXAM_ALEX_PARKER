@@ -11,6 +11,6 @@ function findAll(PDO $connexion) : array
             LEFT JOIN posts p ON c.id = p.category_id
             GROUP BY c.name
             ORDER BY c.name ASC;";
-            
+
     return $connexion->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 }
