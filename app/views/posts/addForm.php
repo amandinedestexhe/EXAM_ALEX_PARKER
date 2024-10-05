@@ -20,7 +20,7 @@
                     <!-- Post Headline End -->
 
                     <!-- Form Start -->
-                    <form action="index.php?posts=add" method="POST">
+                    <form action="posts/add/insert.html" method="posrt">
                       <div class="form-group">
                         <label for="title">Title</label>
                         <input

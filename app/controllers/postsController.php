@@ -59,3 +59,13 @@ function addFormAction(PDO $connexion)
     $content = ob_get_clean();
 }
 
+function addInsertAction(PDO $connexion, array $data) 
+{
+    // Je demande au modèle d'ajouter le post
+    include_once '../app/models/postsModel.php';
+    $id = PostsModel\insertOne($connexion, $data);
+    // Je redirige vers la liste des posts
+    header('location:' . BASE_PUBLIC_URL . 'posts');
+    
+}
+

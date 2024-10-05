@@ -21,9 +21,18 @@ switch ($_GET['posts']):
     // ACTION: addForm
     case 'addForm':
         PostsController\addFormAction($connexion);
-    break;    
-    case 'add':
-        PostsController\addAction($connexion, $_POST);
+    break;
+    // AJOUT D'UN POST: INSERT
+    // PATTERN: index.php?posts=addInsert
+    // CTRL: postsController
+    // ACTION: addInsert
+    case 'addInsert':
+        PostsController\addInsertAction($connexion, [
+            'titre'    => $_POST['title'],
+            'text'     => $_POST['text'],
+            'quote'    => $_POST['quote'],
+            'category' => $_POST['category_id'],
+        ]);
     break;    
     case 'editForm':
         PostsController\editFormAction($connexion, $_GET['id']);

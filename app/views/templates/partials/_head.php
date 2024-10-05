@@ -21,6 +21,7 @@
       type="image/x-icon"
       href="images/favicon/apple-touch-icon.png"
     />
+    
 
     <!-- All CSS Plugins -->
     <link rel="stylesheet" type="text/css" href="css/plugin.css" />

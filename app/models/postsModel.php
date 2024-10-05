@@ -39,3 +39,21 @@ function destroyOneById(PDO $connexion, int $id) : bool
 
     
 }
+
+function insertOne(PDO $connexion, array $data) :int 
+{
+    $sql = "INSERT INTO posts
+            SET title = :title,
+                text  = :text,
+                quote = :quote,
+                category_id = :category_id,
+                created_at = NOW();";
+    $rs = $connexion->prepare($sql);
+    $rs->bindValue(':title', $data['title'], PDO::PARAM_STR);
+    $rs->bindValue(':text', $data['text'], PDO::PARAM_STR);
+    $rs->bindValue(':quote', $data['quote'], PDO::PARAM_STR);
+    $rs->bindValue(':category_id', $data['category_id'], PDO::PARAM_INT);
+    $rs->execute();
+    return $connexion->lastInsertId();
+
+}
