@@ -13,7 +13,6 @@
                 </div>
               </div>
             </div>
-
             <?php include_once '../app/views/templates/partials/_footer.php'?>
           </div>
           <!-- Blog Post (Right Sidebar) End -->
