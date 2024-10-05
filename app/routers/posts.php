@@ -5,6 +5,9 @@ use \App\Controllers\PostsController;
 include_once '../app/controllers/postsController.php';
 
 switch ($_GET['posts']):
+    case 'show':
+        PostsController\showAction($connexion, $_GET['id']);
+        break;
     case 'destroy':
         PostsController\destroyAction($connexion, $_GET['id']);
     break;

@@ -1,3 +1,4 @@
+<?php include_once '../app/views/templates/partials/_button_add_post.php'?>
         <!-- Blog Post Start -->
             <div class="col-md-12 blog-post row">
                 <?php foreach ($posts as $post): ?>
@@ -25,3 +26,4 @@
                 <?php endforeach; ?>  
             </div>
         <!-- Blog Post End -->
+<?php include_once '../app/views/templates/partials/_pagination.php'?>

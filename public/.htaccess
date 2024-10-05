@@ -11,6 +11,11 @@ RewriteEngine on
 # URL: ?posts=index
 RewriteRule ^posts$ index.php?posts=index [L]
 
+# ROUTE: Détail d'un post
+# PATTERN: /books/{id}/{slug}
+# URL: index.php?posts=show&id=xxx
+RewriteRule ^posts/([1-9][0-9]*)/[a-z0-9\-]+.html$ index.php?posts=show&id=$1 [L]
+
 
 
 
