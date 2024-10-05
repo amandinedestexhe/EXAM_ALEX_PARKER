@@ -33,3 +33,16 @@ function showAction(PDO $connexion, int $id)
     include '../app/views/posts/show.php';
     $content = ob_get_clean();
 }
+
+function destroyAction(PDO $connexion, int $id) 
+{
+
+     //Je vais supprimer des données dans la DB grave au modèle
+     include_once '../app/models/postsModel.php';
+     // Je vais chercher la categorie qui correspond à l'id
+     $response = PostsModel\destroyOneById($connexion, $id);
+
+     // Je redirige vers la liste des catégories 
+        header('Location: ' . BASE_PUBLIC_URL . 'posts');
+
+}
