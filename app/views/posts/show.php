@@ -71,7 +71,7 @@
 
                     <!-- Post Buttons -->
                     <div>
-                      <a href="posts/edit/form/<?php echo $post['id']; ?>" type="button" class="btn btn-primary"
+                      <a href="posts/<?php echo $post['id']; ?>/edit/form" type="button" class="btn btn-primary"
                         >Edit Post</a
                       >
                       <a

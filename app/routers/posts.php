@@ -37,7 +37,11 @@ switch ($_GET['posts']):
             'quote'    => $_POST['quote'],
             'category' => $_POST['category_id'],
         ]);
-     break;    
+     break;
+    // FORMULAIRE DE MODIFICATION D'UN POST
+    // PATTERN: index.php?posts=editForm&id=xxx
+    // CTRL: postsController
+    // ACTION: editForm    
     case 'editForm':
         PostsController\editFormAction($connexion, $_GET['id']);
      break;    

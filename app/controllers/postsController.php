@@ -3,7 +3,7 @@
 
 namespace App\Controllers\PostsController;
 
-use \PDO, \App\Models\PostsModel;
+use PDO, \App\Models\PostsModel;
 
 function indexAction(PDO $connexion)
 {
@@ -71,4 +71,23 @@ function deleteAction(PDO $connexion, int $id)
      // Je redirige vers la liste des posts
         header('Location: ' . BASE_PUBLIC_URL . 'posts');
 
+}
+
+function editFormAction(PDO $connexion, int $id) 
+{
+    // Je demande au modèle le post à afficher dans le formulaire
+    include_once '../app/models/postsModel.php';
+    $post = PostsModel\findOneById($connexion, $id);
+
+    // Je vais chercher les categories 
+     include_once '../app/models/categoriesModel.php';
+     $categories = \App\Models\CategoriesModel\findAll($connexion);
+
+
+    // Je charge la vue editForm dans $content
+    GLOBAL $content, $title;
+    $title = "Alex Parker - Edit a post";
+    ob_start();
+    include '../app/views/posts/editForm.php';
+    $content = ob_get_clean();
 }

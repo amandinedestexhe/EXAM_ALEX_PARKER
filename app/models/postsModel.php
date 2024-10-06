@@ -16,9 +16,10 @@ function findAll(PDO $connexion): array
 }
 function findOneById(PDO $connexion, $id): array
 {
-    $sql = "SELECT*
-           FROM posts
-           WHERE id = :id;";
+    $sql = "SELECT*, posts.id AS postID
+           FROM posts 
+           JOIN categories ON categories.id = category_id
+           WHERE posts.id = :id;";
 
     $rs = $connexion->prepare($sql);
     $rs->bindValue(':id', $id, PDO::PARAM_INT);
