@@ -30,7 +30,10 @@ RewriteRule ^posts\/add\/form.html$ index.php?posts=addForm [L]
 # URL: index.php?posts=addInsert
 RewriteRule ^posts\/add\/insert.html$ index.php?posts=addInsert [L]
 
-
+# ROUTE: Suppression d'un post
+# PATTERN: /posts/id/slug-du-post/delete.html
+# URL: index.php?posts=delete&id=xxx
+RewriteRule ^posts/([1-9][0-9]*)/delete.html$ index.php?posts=delete&id=$1 [L]
 
 
 

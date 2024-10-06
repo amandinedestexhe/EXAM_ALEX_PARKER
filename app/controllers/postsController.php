@@ -3,7 +3,7 @@
 
 namespace App\Controllers\PostsController;
 
-use PDO, \App\Models\PostsModel;
+use \PDO, \App\Models\PostsModel;
 
 function indexAction(PDO $connexion)
 {
@@ -34,18 +34,7 @@ function showAction(PDO $connexion, int $id)
     $content = ob_get_clean();
 }
 
-function destroyAction(PDO $connexion, int $id) 
-{
 
-     //Je vais supprimer des données dans la DB grave au modèle
-     include_once '../app/models/postsModel.php';
-     // Je vais chercher la categorie qui correspond à l'id
-     $response = PostsModel\destroyOneById($connexion, $id);
-
-     // Je redirige vers la liste des catégories 
-        header('Location: ' . BASE_PUBLIC_URL . 'posts');
-
-}
 function addFormAction(PDO $connexion) 
 {
     // Je vais chercher les categories 
@@ -69,3 +58,17 @@ function addInsertAction(PDO $connexion, array $data)
     
 }
 
+function deleteAction(PDO $connexion, int $id) 
+{
+
+     // Je demande au modèle de supprimer les liaisons 1-N correspondantes? 
+     include_once '../app/models/postsModel.php';
+     // Je demande au modèle de supprimer le post
+     $return = PostsModel\deleteOneById($connexion, $id);
+
+     var_dump($return); die();
+   
+     // Je redirige vers la liste des posts
+        header('Location: ' . BASE_PUBLIC_URL . 'posts');
+
+}

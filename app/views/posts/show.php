@@ -71,11 +71,11 @@
 
                     <!-- Post Buttons -->
                     <div>
-                      <a href="<?php echo BASE_PUBLIC_URL; ?>posts/edit/form/<?php echo $post['id']; ?>" type="button" class="btn btn-primary"
+                      <a href="posts/edit/form/<?php echo $post['id']; ?>" type="button" class="btn btn-primary"
                         >Edit Post</a
                       >
                       <a
-                        href="<?php echo BASE_PUBLIC_URL; ?>posts/destroy/<?php echo $post['id']; ?>"
+                        href="posts/<?php echo $post['id']; ?>/delete"
                         type="button"
                         class="btn btn-secondary"
                         role="button"
