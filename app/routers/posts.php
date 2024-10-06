@@ -31,12 +31,7 @@ switch ($_GET['posts']):
     // CTRL: postsController
     // ACTION: addInsert
     case 'addInsert':
-        PostsController\addInsertAction($connexion, [
-            'titre'    => $_POST['title'],
-            'text'     => $_POST['text'],
-            'quote'    => $_POST['quote'],
-            'category' => $_POST['category_id'],
-        ]);
+        PostsController\addInsertAction($connexion, $_POST);
      break;
     // FORMULAIRE DE MODIFICATION D'UN POST
     // PATTERN: index.php?posts=editForm&id=xxx
@@ -44,10 +39,14 @@ switch ($_GET['posts']):
     // ACTION: editForm    
     case 'editForm':
         PostsController\editFormAction($connexion, $_GET['id']);
-     break;    
-    case 'edit':
-        PostsController\editAction($connexion, [$_GET['id'], $_POST]
-        );
+     break;  
+    // EDITION D'UN POST : UPDATE
+    // PATTERN: index.php?posts=editUpdate&id=xxx
+    // CTRL: postsController
+    // ACTION: editUprdate    
+    case 'editUpdate':
+        PostsController\editUpdateAction($connexion, $_GET['id'], $_POST);
+        
      break; 
     // LISTE DES POSTS
     // PATTERN: index.php?posts=index

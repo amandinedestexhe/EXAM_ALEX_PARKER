@@ -15,12 +15,12 @@
                   <div class="col-md-12 blog-post">
                     <!-- Post Headline Start -->
                     <div class="post-title">
-                      <h1>Post Form editing</h1>
+                      <h1>Edit Post</h1>
                     </div>
                     <!-- Post Headline End -->
 
                     <!-- Form Start -->
-                    <form action="posts/add/insert.html" method="post">
+                    <form action="posts/<?php echo $post['postID'] ?>/<?php echo \Core\Helpers\slugify($post['title']); ?>/edit/update.html" method="post">
                       <div class="form-group">
                         <label for="title">Title</label>
                         <input
@@ -40,17 +40,17 @@
                           class="form-control"
                           rows="5"
                           placeholder="Enter your text here"
-                          value="<?php echo $post['text'] ?>"
-                        ></textarea>
+                        ><?php echo $post['text'] ?></textarea>
                       </div>
-                      <form action="upload.php" method="post" enctype="multipart/form-data">
                       <div class="form-group">
-                        <label for="image">Choisir une imabe :</label>
-                        <input type="file" name="image" id="image"class="form-control-file btn btn-primary" accept="image/*" required>
-                        <br><br>
-                        <input type="submit" value="Télécharger l'image">
+                        <label for="exampleFormControlFile1"> Image</label>
+                        <input
+                          name="image"
+                          type="file"
+                          class="form-control-file btn btn-primary"
+                          id="exampleFormControlFile1"
+                        />
                       </div>
-                      </form>
                       <div class="form-group">
                         <label for="text">Quote</label>
                         <textarea
@@ -59,8 +59,7 @@
                           class="form-control"
                           rows="5"
                           placeholder="Enter your quote here"
-                          value="<?php echo $post['quote'] ?>"
-                        ></textarea>
+                          ><?php echo $post['quote'] ?></textarea>
                       </div>
                       <div class="form-group">
                         <label for="category">Category</label>
@@ -68,14 +67,14 @@
                           id="category"
                           name="category_id"
                           class="form-control"
-                          value="<?php echo $category['name'] ?>"
                         >
                         <option disabled selected>
                             Select your category
                           </option>
-                        <?php foreach ($categories as $category): ?>
+                          <?php 
+                          foreach ($categories as $category): ?>
                           
-                          <option value="<?php echo $category['id'] ?>" <?php if($category['id'] == $post['category_id']) { echo 'selected="selected"';} ?>><?php echo $category['category_name'] ?>
+                          <option value="<?php echo $category['id'] ?>" <?php echo($category['id'] == $post['category_id']) ?'selected' : ''; ?>><?php echo $category['name'] ?>
 
                           </option>
                         <?php endforeach; ?>

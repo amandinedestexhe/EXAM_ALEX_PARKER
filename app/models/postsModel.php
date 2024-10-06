@@ -16,10 +16,10 @@ function findAll(PDO $connexion): array
 }
 function findOneById(PDO $connexion, $id): array
 {
-    $sql = "SELECT*, posts.id AS postID
-           FROM posts 
-           JOIN categories ON categories.id = category_id
-           WHERE posts.id = :id;";
+    $sql = "SELECT c.*, p.*, p.id AS postID, c.id AS categoryID
+           FROM posts p
+           JOIN categories c ON c.id = p.category_id
+           WHERE p.id = :id;";
 
     $rs = $connexion->prepare($sql);
     $rs->bindValue(':id', $id, PDO::PARAM_INT);
@@ -29,14 +29,12 @@ function findOneById(PDO $connexion, $id): array
 }
 
 
-function insertOne(PDO $connexion, array $data) :int 
+function insertOne(PDO $connexion, array $data) :int
 {
-    $sql = "INSERT INTO posts
-            SET title = :title,
-                text  = :text,
-                quote = :quote,
-                category_id = :category_id,
-                created_at = NOW();";
+    
+    $sql = "INSERT INTO posts (title, text, quote, category_id, created_at)
+        VALUES (:title, :text, :quote, :category_id, NOW());";
+
     $rs = $connexion->prepare($sql);
     $rs->bindValue(':title', $data['title'], PDO::PARAM_STR);
     $rs->bindValue(':text', $data['text'], PDO::PARAM_STR);
@@ -58,4 +56,25 @@ function deleteOneById(PDO $connexion, int $id) : bool
     $rs->bindValue(':id', $id, PDO::PARAM_INT);
     return $rs->execute();
     
+}
+
+function updateOneById(PDO $connexion, int $id, array $data) :bool
+{
+    $sql = "UPDATE posts
+            SET title = :title,
+            text  = :text,
+            quote = :quote,
+            category_id = :category_id
+            WHERE id = :id;";
+            
+
+    $rs = $connexion->prepare($sql);
+    $rs->bindValue(':id', $id, PDO::PARAM_INT);
+    $rs->bindValue(':title', $data['title'], PDO::PARAM_STR);
+    $rs->bindValue(':text', $data['text'], PDO::PARAM_STR);
+    $rs->bindValue(':quote', $data['quote'], PDO::PARAM_STR);
+    $rs->bindValue(':category_id', $data['category_id'], PDO::PARAM_INT);
+    return $rs->execute();
+
+
 }

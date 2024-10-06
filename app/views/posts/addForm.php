@@ -20,7 +20,7 @@
                     <!-- Post Headline End -->
 
                     <!-- Form Start -->
-                    <form action="posts/add/insert.html" method="post">
+                    <form action="posts/add/insert.html" method="POST">
                       <div class="form-group">
                         <label for="title">Title</label>
                         <input
@@ -41,14 +41,13 @@
                           placeholder="Enter your text here"
                         ></textarea>
                       </div>
-                      <form action="upload.php" method="post" enctype="multipart/form-data">
                       <div class="form-group">
-                        <label for="image">Choisir une imabe :</label>
-                        <input type="file" name="image" id="image"class="form-control-file btn btn-primary" accept="image/*" required>
-                        <br><br>
-                        <input type="submit" value="Télécharger l'image">
+                        <label for="exampleFormControlFile1"> Image</label>
+                        <input 
+                        type="file" 
+                        class="form-control-file btn btn-primary" 
+                        id="exampleFormControlFile1"/>
                       </div>
-                      </form>
                       <div class="form-group">
                         <label for="text">Quote</label>
                         <textarea
@@ -69,10 +68,10 @@
                         <option disabled selected>
                             Select your category
                           </option>
-                        <?php foreach ($categories as $category): ?>
-                          
-                          <option value="<?php echo $category['id'] ?>"><?php echo $category['category_name'] ?>
-
+                         
+                          <?php foreach ($categories AS $category): ?>
+                          <option value="<?php echo $category['id'] ?>">
+                            <?php echo $category['name'] ?>
                           </option>
                         <?php endforeach; ?>
                         </select>

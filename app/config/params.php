@@ -12,4 +12,4 @@ define("DB_USER", "root");
 define("DB_PASSWORD", "root");
 
 // AUTRES PARAMETRES
-define('DISPATCHER_NAME', 'index');
+define('DISPATCHER_NAME', 'index.php');

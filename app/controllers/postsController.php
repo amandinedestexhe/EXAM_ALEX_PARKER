@@ -3,7 +3,7 @@
 
 namespace App\Controllers\PostsController;
 
-use PDO, \App\Models\PostsModel;
+use PDO, \App\Models\PostsModel, \App\Models\CategoriesModel ;
 
 function indexAction(PDO $connexion)
 {
@@ -37,8 +37,8 @@ function showAction(PDO $connexion, int $id)
 
 function addFormAction(PDO $connexion) 
 {
-    // Je vais chercher les categories 
-    include_once '../app/models/categoriesModel.php';
+
+    include_once "../app/models/categoriesModel.php";
     $categories = \App\Models\CategoriesModel\findAll($connexion);
     // Je charge la vue addForm dans $content
     GLOBAL $content, $title;
@@ -54,35 +54,31 @@ function addInsertAction(PDO $connexion, array $data)
     include_once '../app/models/postsModel.php';
     $id = PostsModel\insertOne($connexion, $data);
     // Je redirige vers la liste des posts
-    header('location:' . BASE_PUBLIC_URL . 'posts');
+    header('Location:' . BASE_PUBLIC_URL . 'posts');
     
 }
 
 function deleteAction(PDO $connexion, int $id) 
 {
 
-     // Je demande au modèle de supprimer les liaisons 1-N correspondantes? 
-     include_once '../app/models/postsModel.php';
-     // Je demande au modèle de supprimer le post
-     $return = PostsModel\deleteOneById($connexion, $id);
+    // Je demande au modèle de supprimer le post
+    include_once '../app/models/postsModel.php';
+    $return = PostsModel\deleteOneById($connexion, $id);
 
-     var_dump($return); die();
-   
-     // Je redirige vers la liste des posts
-        header('Location: ' . BASE_PUBLIC_URL . 'posts');
+    // Je redirige vers la liste des posts
+    header('Location: ' . BASE_PUBLIC_URL . 'posts');
 
 }
 
 function editFormAction(PDO $connexion, int $id) 
 {
+    // Je rend les catégories accessible à la vue 
+    include_once "../app/models/categoriesModel.php";
+    $categories = \App\Models\CategoriesModel\findAll($connexion);
+    
     // Je demande au modèle le post à afficher dans le formulaire
     include_once '../app/models/postsModel.php';
     $post = PostsModel\findOneById($connexion, $id);
-
-    // Je vais chercher les categories 
-     include_once '../app/models/categoriesModel.php';
-     $categories = \App\Models\CategoriesModel\findAll($connexion);
-
 
     // Je charge la vue editForm dans $content
     GLOBAL $content, $title;
@@ -90,4 +86,14 @@ function editFormAction(PDO $connexion, int $id)
     ob_start();
     include '../app/views/posts/editForm.php';
     $content = ob_get_clean();
+}
+
+function editUpdateAction(PDO $connexion, int $id, array $data) 
+{
+    // Je demande au modèle de modifier le post
+    include_once '../app/models/postsModel.php';
+    $return1 = PostsModel\updateOneById($connexion, $id, $data);
+    // Je redirige vers la liste des posts
+    header('Location: ' . BASE_PUBLIC_URL . 'posts');
+
 }
